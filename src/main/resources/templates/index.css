@@ -5,6 +5,14 @@
 body
 {
 	background-color: #BCF5A9;
+      background-image: url("fotos/pag_inscricao.jpg");
+      background-position: center top;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+      color:  #2E2E2E;
+      padding-top: 30px;
+      padding-bottom: 30px;
 }
 
 #titulo   /*  -------------------------------------------------------- Cabeçalho da página */
@@ -13,17 +21,32 @@ body
 	padding: 5px;
 	text-align: center;
 	font-family: times;
-	font-size: 150%;
-	color:white;
+	font-size: 240%;
+	color:black;
 	background-color:white;
 }
 
-h1{
-	margin: 20px auto;
-	padding: 5px;
-	text-align: left;
+#banner article   /* ------------------------------------------ Fotos na largura da página */
+{
+	float: left;
+	width: 32%;
+	margin-top: 40px;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom: 150px;
+	text-align: center;
+}
+
+#satisfacao{
+margin: 10px auto;
 	font-family: times;
-	font-size: 50px;
+	font-size: 160%;
 	color:black;
-    font-size: 250%;
+}
+
+#cabecalho{
+font-size: 200%;
+margin-bottom: 40px;
+text-align: center;
+
 }
