@@ -1,0 +1,29 @@
+	*{
+	margin: 0px;
+	padding: 0px;
+}
+body
+{
+	background-color: #BCF5A9;
+}
+
+#titulo   /*  -------------------------------------------------------- Cabeçalho da página */
+{
+	margin: 20px auto;
+	padding: 5px;
+	text-align: center;
+	font-family: times;
+	font-size: 150%;
+	color:white;
+	background-color:white;
+}
+
+h1{
+	margin: 20px auto;
+	padding: 5px;
+	text-align: left;
+	font-family: times;
+	font-size: 50px;
+	color:black;
+    font-size: 250%;
+}
