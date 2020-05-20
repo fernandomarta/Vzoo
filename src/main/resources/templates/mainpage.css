@@ -20,7 +20,7 @@ body
 	background-color:white;
 }
 
-#banner article   /* ------------------------------------------ Fotos na largura da página */
+#menu article   /* ------------------------------------------ Fotos na largura da página */
 {
 	float: left;
 	width: 32%;
