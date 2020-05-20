@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Attendants Management</title>
+</head>
+<body>
+<div th:switch="${attendants}">
+    <h2 th:case="null">No Attendants yet!</h2>
+    <h2 th:case="*">I have some Attendants!</h2>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>E-mail</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="attendant : ${attendants}">
+            <td th:text="${attendant.name}"></td>
+            <td th:text="${attendant.email}"></td>
+        </tr>
+    </tbody>
+</table>
+<p><a href="/createAttendants">Create Attendants Model</a></p>
+</body>
+</html>
