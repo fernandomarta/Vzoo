@@ -2,7 +2,6 @@
 <html xmlns:th="https://www.thymeleaf.org">
 
 <head>
-    <html lang="en">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta charset="UTF-8">
     <title>Virtual ZOO</title>
@@ -22,16 +21,19 @@
 <div id="menu">
 
     <article>
-        <img src="./media/elephant-family.jpg" width="300" height="280">
+        <form action="#" th:action="@{/animalspage}" th:object="${mainpage}" method="post">
+        <a href="/animalspage" ><img src="./media/animal.jpg" width="300" height="280"></a>
+        </form>
     </article>
     <article>
-        <img src="./media/Gorila.png" width="300" height="280">
+        <form action="#" th:action="@{/habitatspage}" th:object="${habitatspage}" method="post">
+            <a href="/habitatspage" ><img src="./media/green.jpg" width="300" height="280"></a>
+        </form>
     </article>
     <article>
-        <img src="./media/Gorila.png" width="300" height="280">
-
-
-
+        <form action="#" th:action="@{/attendantspage}" th:object="${attendantspage}" method="post">
+            <a href="/attendantspage" ><img src="./media/funcionarios.webp" width="300" height="280"></a>
+        </form>
     </article>
 </div>
 
