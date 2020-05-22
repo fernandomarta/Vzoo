@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="UTF-8">
+    <title>Virtual ZOO - Funcionário</title>
+    <link rel="stylesheet" type="text/css" href="mainpage.css"/>
+    <link rel="shortcut icon" type="image/x-icon" href="./media/gorila_icon.ico"/>
+</head>
+<body>
+    <h2>Novo Funcionário</h2>
+    <form action="#" th:action="@{/funcionario_criar_novo}" th:object="${attendant}" method="post">
+        <input type="text" th:field="*{name}" id="name" placeholder="Insert name here">
+        <input type="email" th:field="*{email}" id="email" placeholder="Insert e-mail here">
+        <input type="submit" value="Adicionar funcionário!">
+    </form>
+</body>
+</html>
