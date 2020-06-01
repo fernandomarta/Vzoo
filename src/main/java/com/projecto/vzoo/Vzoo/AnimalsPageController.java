@@ -16,18 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class AnimalsPageController {
 
-    @GetMapping("/animalspage")
-    public String animals(Model model)
-    {
-        return "animalspage";
-    }
-
-    @PostMapping("/animalspage")
-    public String goToAnimals(Model model)
-    {
-        return "animalspage";
-    }
-
     private AnimalRepository animalRepository;
 
     @Autowired
@@ -35,15 +23,29 @@ public class AnimalsPageController {
         this.animalRepository = animalRepository;
     }
 
-    @GetMapping("/signup")
-    public String showSignUpForm(Animal animal) {
-        return "add-animal";
+    @GetMapping("/animalspage")
+    public String animals(Model model)
+    {
+    	model.addAttribute("animals", animalRepository.findAll());
+        return "animalspage";
+    }
+
+    @PostMapping("/animalspage")
+    public String goToAnimals(Model model)
+    {
+    	model.addAttribute("animals", animalRepository.findAll());
+        return "animalspage";
+    }
+
+    @GetMapping("/showAddAnimal")
+    public String showAddAnimal(Animal animal) {
+        return "animal_criar_novo";
     }
 
     @PostMapping("/addAnimal")
     public String addAnimal(@Validated Animal animal, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "add-animal";
+            return "animal_criar_novo";
         }
 
         animalRepository.save(animal);
@@ -51,14 +53,14 @@ public class AnimalsPageController {
         return "animalspage";
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/showUpdateAnimal/{id}")
     public String showUpdateForm(@PathVariable("id") long id, Model model) {
         Animal animal = animalRepository.findById(id);
         model.addAttribute("animals", animal);
         return "update-animal";
     }
 
-    @PostMapping("/update/{id}")
+    @PostMapping("/updateAnimal/{id}")
     public String updateAnimal(@PathVariable("id") long id, @Validated Animal animal, BindingResult result, Model model) {
         if (result.hasErrors()) {
             animal.setId(id);
@@ -70,10 +72,12 @@ public class AnimalsPageController {
         return "animalspage";
     }
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/deleteAnimal/{id}")
     public String deleteAnimal(@PathVariable("id") long id, Model model) {
         Animal animal = animalRepository.findById(id);
-        animalRepository.delete(animal);
+        if (animal != null) {
+            animalRepository.delete(animal);
+        }
         model.addAttribute("animals", animalRepository.findAll());
         return "animalspage";
     }

@@ -11,5 +11,5 @@ import java.util.List;
 // Delete
 
 public interface AttendantRepository extends CrudRepository<Attendant, Long> {
-    public List<Attendant> findByEmail(String email);
+    public List<Attendant> findById(long id);
 }

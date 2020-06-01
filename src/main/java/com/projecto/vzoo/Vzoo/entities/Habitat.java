@@ -5,13 +5,47 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-
 @Entity
 public class Habitat {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+    private Long area;
+    private String name;
+
+    public Habitat() {
+    }
+    
+    public Habitat(Long area, String name) {
+        this.area = area;
+        this.name = name;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setArea(Long area) {
+        this.area = area;
+    }
+
+    public Long getArea() {
+        return area;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 
     @Override
     public String toString() {
@@ -21,37 +55,4 @@ public class Habitat {
                 ", name='" + name + '\'' +
                 '}';
     }
-
-    public Habitat(long area, String name) {
-        this.area = area;
-        this.name = name;
-    }
-
-    private long area;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public long getArea() {
-        return area;
-    }
-
-    public void setArea(long area) {
-        this.area = area;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    private String name;
 }

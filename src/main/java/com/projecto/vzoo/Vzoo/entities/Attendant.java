@@ -1,56 +1,39 @@
 package com.projecto.vzoo.Vzoo.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
-public class Attendant {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+public class Attendant extends Employee {
 
-    private String name;
-    private String email;
+    @OneToMany
+	private List<Habitat> habitats = new ArrayList<>();
 
-    protected Attendant() {}
-
-    public Attendant(String name, String email) {
-        this.name = name;
-        this.email = email;
+    public Attendant() {
     }
 
-    public long getId() {
-        return id;
+    public Attendant(String name, List<Habitat> habitats) {
+        this.setName(name);
+        this.habitats = habitats;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setHabitats(List<Habitat> habitats) {
+        this.habitats = habitats;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public List<Habitat> getHabitats() {
+        return this.habitats;
     }
 
     @Override
     public String toString() {
         return "Attendant{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
+                "id=" + this.getId() +
+                ", name='" + this.getName() + '\'' +
+                ", habitats='" + this.habitats + '\'' +
                 '}';
     }
 }

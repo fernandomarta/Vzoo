@@ -1,11 +1,13 @@
 package com.projecto.vzoo.Vzoo.repositories;
 
-import com.projecto.vzoo.Vzoo.entities.Animal;
-import org.springframework.data.repository.CrudRepository;
-
 import java.util.List;
 
+import org.springframework.data.repository.CrudRepository;
+
+import com.projecto.vzoo.Vzoo.entities.Animal;
+import com.projecto.vzoo.Vzoo.entities.Specie;
+
 public interface AnimalRepository extends CrudRepository<Animal, Long> {
-    List<Animal> findBySpecies(String species);
+    List<Animal> findBySpecie(Specie specie);
     Animal findById(long id);
 }

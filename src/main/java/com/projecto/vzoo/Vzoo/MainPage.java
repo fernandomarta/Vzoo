@@ -12,3 +12,4 @@ public class MainPage {
         this.pagename = pagename;
     }
 }
+

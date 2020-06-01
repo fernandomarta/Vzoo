@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="UTF-8">
+    <title>Virtual ZOO - Funcionário</title>
+    <link rel="stylesheet" type="text/css" href="mainpage.css"/>
+    <link rel="shortcut icon" type="image/x-icon" href="./media/gorila_icon.ico"/>head>
+<body>
+<div th:switch="${attendants}">
+    <h2 th:case="null">No Attendants yet!</h2>
+    <h2 th:case="*">I have some Attendants!</h2>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>E-mail</th>
+        </tr>
+
+    </thead>
+    <tbody>
+        <tr th:each="attendant : ${attendants}">
+            <td th:text="${attendant.name}"></td>
+            <td th:text="${attendant.email}"></td>
+        </tr>
+    </tbody>
+</table>
+<p><a href="/createAttendants">Create Attendants Model</a></p>
+</body>
+</html>
