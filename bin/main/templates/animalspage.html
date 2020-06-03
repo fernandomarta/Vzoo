@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Virtual Zoo - Animals</title>
+    <title>Virtual Zoo - Animais</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
@@ -15,24 +15,28 @@
 <div th:switch="${animals}" class="container my-5">
     <div class="row">
         <div class="col-md-6">
-            <h2 th:case="null">No Animals yet! 😔😔</h2>
+            <h2 th:case="null">Nenhum animal ainda! 😔😔</h2>
             <div th:case="*">
-                <h2 class="my-5">Animals 🦊🦊🦊🦊</h2>
+                <h2 class="my-5">Animais 🦊🦊🦊🦊</h2>
                 <table class="table table-striped table-responsive-md">
                     <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Species</th>
+                        <th>Nome</th>
+                        <th>Espécie</th>
+                        <th>Habitat</th>
                         <!--<th>Edit</th>-->
-                        <th>Delete</th>
+                        <th>Excluir</th>
+                        <th>Transferir</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="animal : ${animals}">
                         <td th:text="${animal.name}"></td>
-                        <td th:text="${animal.species}"></td>
+                        <td th:text="${animal.specie.name}"></td>
+                        <td th:text="${animal.habitat.name}"></td>
                         <!--<td><a th:href="@{/showUpdateAnimal/{id}(id=${animal.id})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>-->
                         <td><a th:href="@{/deleteAnimal/{id}(id=${animal.id})}" class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>
+                        <td><a th:href="@{/showTransferAnimal/{id}(id=${animal.id})}" class="btn btn-primary"><i class="fas fa-angle-double-right ml-2"></i></a></td>
                     </tr>
                     </tbody>
                 </table>

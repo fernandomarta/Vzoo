@@ -57,6 +57,14 @@ public class Animal {
         return specie;
     }
 
+    public void setSound(String sound) {
+        this.sound = sound;
+    }
+
+    public String getSound() {
+        return this.sound;
+    }
+
     public void setHabitat(Habitat habitat) {
         this.habitat = habitat;
     }

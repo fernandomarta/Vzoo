@@ -3,50 +3,54 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Virtual Zoo - Novo Animal</title>
+    <title>Virtual Zoo - Transferir Animal</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
-    <link rel="stylesheet" href="mainpage.css">
+    <link rel="stylesheet" type="text/css" href="mainpage.css">
     <link rel="shortcut icon" type="image/x-icon" href="./media/gorila_icon.ico"/>
 </head>
 <body>
 <div class="container my-5">
-    <h2 class="mb-5">Novo Animal</h2>
+    <h2 class="mb-5">Transferir Animal</h2>
     <div class="row">
         <div class="col-md-6">
-            <form action="#" th:action="@{/addAnimal}" th:object="${animal}" method="post">
+            <form action="#" th:action="@{/transferAnimal}" th:object="${animal}" method="post">
                 <div class="row">
+                    <input type="hidden" th:field="*{id}" id="id" placeholder="ID">
                     <div class="form-group col-md-6">
                         <label for="name" class="col-form-label">Nome</label>
-                        <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Nome">
+                        <input type="text" readonly th:field="*{name}" class="form-control" id="name" placeholder="Nome">
                         <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="specie" class="col-form-label">Espécie</label>
-                        <select class="form-control" th:field="*{specie}"  id="specie">
+                        <select disabled class="form-control" th:field="*{specie}"  id="specie">
     						<option value="0">Selecionar Espécie</option>
     						<option th:each="specie : ${species}" th:value="${specie.id}" th:text="${specie.name}"></option>
     					</select>
                         <span th:if="${#fields.hasErrors('specie')}" th:errors="*{specie}" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="sound" class="col-form-label">Som</label>
-                        <input type="text" th:field="*{sound}" class="form-control" id="sound" placeholder="Som">
-                        <span th:if="${#fields.hasErrors('sound')}" th:errors="*{sound}" class="text-danger"></span>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="habitat" class="col-form-label">Habitat</label>
-                        <select class="form-control" th:field="*{habitat}"  id="habitat">
+                        <label for="habitat" class="col-form-label">Habitat Atual</label>
+                        <select disabled class="form-control" th:field="*{habitat}"  id="oldhabitat">
     						<option value="0">Selecionar Habitat</option>
-    						<option th:each="habitat : ${habitats}" th:value="${habitat.id}" th:text="${habitat.name}"></option>
+    						<option th:each="oldhabitat : ${habitats}" th:value="${oldhabitat.id}" th:text="${oldhabitat.name}"></option>
+    					</select>
+                        <span th:if="${#fields.hasErrors('habitat')}" th:errors="*{habitat}" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6" th:object="${animalhabitatshistory}">
+                        <label for="habitat" class="col-form-label">Habitat Novo</label>
+                        <select  class="form-control" th:field="*{habitat}"  id="newhabitat">
+    						<option value="0">Selecionar Habitat</option>
+    						<option th:each="newhabitat : ${newhabitats}" th:value="${newhabitat.id}" th:text="${newhabitat.name}"></option>
     					</select>
                         <span th:if="${#fields.hasErrors('habitat')}" th:errors="*{habitat}" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 mt-5">
-                        <input type="submit" class="btn btn-primary" value="Adicionar Animal 🦊🦊">
+                        <input type="submit" class="btn btn-primary" value="Transferir Animal 🦊🦊">
                     </div>
                 </div>
             </form>
