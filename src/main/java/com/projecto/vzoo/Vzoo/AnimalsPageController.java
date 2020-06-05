@@ -49,6 +49,15 @@ public class AnimalsPageController {
         return "animalspage";
     }
 
+    @GetMapping("/showConsultAnimal/{id}")
+    public String showConsultAnimal(@PathVariable("id") long id, Model model) {
+        Animal animal = animalRepository.findById(id);
+        model.addAttribute("animal", animal);
+    	model.addAttribute("animalhabitatshistory", animalsHabitatsHistoryRepository.findByAnimal(animal));
+    	
+    	return "animal_consultar";
+    }
+
     @GetMapping("/showAddAnimal")
     public String showAddAnimal(Animal animal, Model model) {
     	model.addAttribute("species", specieRepository.findAll());
@@ -69,15 +78,25 @@ public class AnimalsPageController {
     }
 
     @GetMapping("/showTransferAnimal/{id}")
-    public String showTransferForm(@PathVariable("id") long id, Model model) {
+    public String showTransferAnimal(@PathVariable("id") long id, Model model) {
         Animal animal = animalRepository.findById(id);
         model.addAttribute("animal", animal);
 
     	model.addAttribute("species", specieRepository.findById(animal.getSpecie().getId()));
-    	model.addAttribute("habitats", habitatRepository.findById(animal.getHabitat().getId()));
-    	model.addAttribute("newhabitats", habitatRepository.findAll());
-    	model.addAttribute("animalhabitatshistory", new AnimalHabitatsHistory());
+    	model.addAttribute("oldHabitats", habitatRepository.findById(animal.getHabitat().getId()));
+    	model.addAttribute("habitats", habitatRepository.findAll());
     	
+        Habitat oldHabitat = new Habitat();
+        oldHabitat.setId(animal.getHabitat().getId());
+        oldHabitat.setName(animal.getHabitat().getName());
+        oldHabitat.setArea(animal.getHabitat().getArea());
+    	
+    	AnimalHabitatsHistory animalHabitatsHistory = new AnimalHabitatsHistory();
+    	animalHabitatsHistory.setOldHabitat(oldHabitat);
+    	model.addAttribute("animalhabitatshistory", animalHabitatsHistory);
+    	
+    	animal.setHabitat(null);
+ 	
     	return "animal_transferir";
     }
 
@@ -88,31 +107,19 @@ public class AnimalsPageController {
         }
 
         Animal savedAnimal = animalRepository.findById(animal.getId());
-        
-        Habitat oldHabitat = new Habitat();
-        oldHabitat.setId(savedAnimal.getHabitat().getId());
-        oldHabitat.setName(savedAnimal.getHabitat().getName());
-        oldHabitat.setArea(savedAnimal.getHabitat().getArea());
-
-        Habitat newHabitat = new Habitat();
-        newHabitat.setId(animalHabitatsHistory.getHabitat().getId());
-        newHabitat.setName(animalHabitatsHistory.getHabitat().getName());
-        newHabitat.setArea(animalHabitatsHistory.getHabitat().getArea());
+        savedAnimal.setHabitat(animal.getHabitat());
+        animalRepository.save(savedAnimal);
 
         animalHabitatsHistory.setAnimal(savedAnimal);
-        animalHabitatsHistory.setHabitat(oldHabitat);
-        animalHabitatsHistory.setDate(new Date());
+        animalHabitatsHistory.setDateTime(new Date());
         animalsHabitatsHistoryRepository.save(animalHabitatsHistory);
-
-        savedAnimal.setHabitat(newHabitat);
-        animalRepository.save(savedAnimal);
 
         model.addAttribute("animals", animalRepository.findAll());
         return "animalspage";
     }
 
     @GetMapping("/showUpdateAnimal/{id}")
-    public String showUpdateForm(@PathVariable("id") long id, Model model) {
+    public String showUpdateAnimal(@PathVariable("id") long id, Model model) {
         Animal animal = animalRepository.findById(id);
         model.addAttribute("animal", animal);
         return "update-animal";

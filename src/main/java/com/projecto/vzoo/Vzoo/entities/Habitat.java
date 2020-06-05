@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Habitat {
@@ -12,7 +14,10 @@ public class Habitat {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @DecimalMin("1.00")
     private Long area;
+
+    @NotBlank
     private String name;
 
     public Habitat() {

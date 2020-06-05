@@ -1,9 +1,8 @@
 package com.projecto.vzoo.Vzoo.repositories;
 
-import com.projecto.vzoo.Vzoo.entities.Attendant;
 import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
+import com.projecto.vzoo.Vzoo.entities.Attendant;
 
 // Create
 // Read
@@ -11,5 +10,5 @@ import java.util.List;
 // Delete
 
 public interface AttendantRepository extends CrudRepository<Attendant, Long> {
-    public List<Attendant> findById(long id);
+    public Attendant findById(long id);
 }

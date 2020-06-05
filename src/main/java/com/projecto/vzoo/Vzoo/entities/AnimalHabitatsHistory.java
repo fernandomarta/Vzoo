@@ -18,15 +18,16 @@ public class AnimalHabitatsHistory {
     @OneToOne
     private Animal animal;
     @OneToOne
-    private Habitat habitat;
+    private Habitat oldHabitat;
+
     private Date dateTime;
     
     public AnimalHabitatsHistory() {
     }
     
-    public AnimalHabitatsHistory(Animal animal, Habitat habitat,Date dateTime) {
+    public AnimalHabitatsHistory(Animal animal, Habitat habitat, Date dateTime) {
         this.animal = animal;
-        this.habitat = habitat;
+        this.oldHabitat = habitat;
         this.dateTime = dateTime;
     }
 
@@ -46,19 +47,19 @@ public class AnimalHabitatsHistory {
         return animal;
     }
 
-    public void setHabitat(Habitat habitat) {
-        this.habitat = habitat;
+    public void setOldHabitat(Habitat habitat) {
+        this.oldHabitat = habitat;
     }
 
-    public Habitat getHabitat() {
-        return habitat;
+    public Habitat getOldHabitat() {
+        return oldHabitat;
     }
     
-    public void setDate(Date dateTime) {
+    public void setDateTime(Date dateTime) {
         this.dateTime = dateTime;
     }
 
-    public Date getDate() {
+    public Date getDateTime() {
         return dateTime;
     }
 
@@ -67,7 +68,7 @@ public class AnimalHabitatsHistory {
         return "AnimalHabitatsHistory{" +
                 "id=" + id +
                 ", animal=" + this.animal +
-                ", habitat=" + this.habitat + 
+                ", habitat=" + this.oldHabitat + 
                 ", dateTime="+ this.dateTime + 
                 '}';
     }

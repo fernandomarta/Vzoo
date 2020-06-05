@@ -25,25 +25,20 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="specie" class="col-form-label">Espécie</label>
-                        <select disabled class="form-control" th:field="*{specie}"  id="specie">
-    						<option value="0">Selecionar Espécie</option>
-    						<option th:each="specie : ${species}" th:value="${specie.id}" th:text="${specie.name}"></option>
-    					</select>
+                        <input type="text" readonly th:field="*{specie.name}" class="form-control" id="specie.name" placeholder="Espécie">
                         <span th:if="${#fields.hasErrors('specie')}" th:errors="*{specie}" class="text-danger"></span>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="habitat" class="col-form-label">Habitat Atual</label>
-                        <select disabled class="form-control" th:field="*{habitat}"  id="oldhabitat">
-    						<option value="0">Selecionar Habitat</option>
-    						<option th:each="oldhabitat : ${habitats}" th:value="${oldhabitat.id}" th:text="${oldhabitat.name}"></option>
-    					</select>
-                        <span th:if="${#fields.hasErrors('habitat')}" th:errors="*{habitat}" class="text-danger"></span>
-                    </div>
                     <div class="form-group col-md-6" th:object="${animalhabitatshistory}">
+                        <label for="habitat" class="col-form-label">Habitat Atual</label>
+                        <input type="hidden" readonly th:field="*{oldHabitat.id}" class="form-control" id="oldHabitat.id">
+                        <input type="text" readonly th:field="*{oldHabitat.name}" class="form-control" id="oldHabitat.name" placeholder="Habitat Atual">
+                        <span th:if="${#fields.hasErrors('oldHabitat')}" th:errors="*{oldHabitat}" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
                         <label for="habitat" class="col-form-label">Habitat Novo</label>
-                        <select  class="form-control" th:field="*{habitat}"  id="newhabitat">
+                        <select class="form-control" th:field="*{habitat}"  id="habitat">
     						<option value="0">Selecionar Habitat</option>
-    						<option th:each="newhabitat : ${newhabitats}" th:value="${newhabitat.id}" th:text="${newhabitat.name}"></option>
+    						<option th:each="habitat : ${habitats}" th:value="${habitat.id}" th:text="${habitat.name}"></option>
     					</select>
                         <span th:if="${#fields.hasErrors('habitat')}" th:errors="*{habitat}" class="text-danger"></span>
                     </div>

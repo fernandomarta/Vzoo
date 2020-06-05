@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Veterinarian extends Employee {
 
-    @OneToMany
+    @ManyToMany
     private List<Specie> species = new ArrayList<>();
 
     public Veterinarian() {
@@ -20,7 +20,7 @@ public class Veterinarian extends Employee {
         this.species = species;
     }
 
-    public void setHabitats(List<Specie> species) {
+    public void setSpecies(List<Specie> species) {
         this.species = species;
     }
 

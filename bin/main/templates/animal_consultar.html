@@ -1,16 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="https://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta charset="UTF-8">
-    <title>Virtual ZOO - Animal</title>
-    <link rel="stylesheet" type="text/css" href="mainpage.css"/>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Virtual Zoo - Consultar Animal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="mainpage.css">
     <link rel="shortcut icon" type="image/x-icon" href="./media/gorila_icon.ico"/>
 </head>
 <body>
-<h1>Consultar animal</h1>
-
-<p>Indique o nome do animal:</p>
-
+<div class="container my-5">
+    <h2 class="mb-5">Consultar Animal</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row" th:object="${animal}">
+                <input type="hidden" th:field="*{id}" id="id" placeholder="ID">
+                <div class="form-group col-md-6">
+                    <label for="name" class="col-form-label">Nome</label>
+                    <input type="text" readonly th:field="*{name}" class="form-control" id="name" placeholder="Nome">
+                    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="specie" class="col-form-label">Espécie</label>
+                    <input type="text" readonly th:field="*{specie.name}" class="form-control" id="specie.name" placeholder="Espécie">
+                    <span th:if="${#fields.hasErrors('specie')}" th:errors="*{specie}" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="sound" class="col-form-label">Som</label>
+                    <input type="text" readonly th:field="*{sound}" class="form-control" id="sound" placeholder="Som">
+                    <span th:if="${#fields.hasErrors('sound')}" th:errors="*{sound}" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="habitat" class="col-form-label">Habitat</label>
+                    <input type="text" readonly th:field="*{habitat.name}" class="form-control" id="habitat.name" placeholder="Habitat">
+                    <span th:if="${#fields.hasErrors('habitat')}" th:errors="*{habitat}" class="text-danger"></span>
+                </div>
+            </div>
+            <br/><br/>
+            <h5>Transferências</h5>
+            <table class="table table-striped table-responsive-md">
+			    <thead>
+			        <tr>
+			            <th> Habitat </th>
+			            <th> Data-hora </th>
+			        </tr>
+			    </thead>
+			    <tbody>
+			    <tr th:if="${animalhabitatshistory.empty}">
+			            <td colspan="2"> Nenhuma transferência </td>
+			        </tr>
+			        <tr th:each="animalOldHabitat : ${animalhabitatshistory}">
+			            <td><span th:text="${animalOldHabitat.oldHabitat.name}"> </span></td>
+			            <td><span th:text="${animalOldHabitat.dateTime}"> </span></td>
+			        </tr>
+			    </tbody>
+			</table>
+            <div class="row">
+                <div class="col-md-6 mt-5">
+                    <input type="button" class="btn btn-primary" value="Voltar" onclick="window.history.back();">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

@@ -24,6 +24,7 @@
                         <th>Nome</th>
                         <th>Espécie</th>
                         <th>Habitat</th>
+                        <th>Consultar</th>
                         <!--<th>Edit</th>-->
                         <th>Excluir</th>
                         <th>Transferir</th>
@@ -34,6 +35,7 @@
                         <td th:text="${animal.name}"></td>
                         <td th:text="${animal.specie.name}"></td>
                         <td th:text="${animal.habitat.name}"></td>
+                        <td><a th:href="@{/showConsultAnimal/{id}(id=${animal.id})}" class="btn btn-primary"><i class="fas fa-search ml-2"></i></a></td>
                         <!--<td><a th:href="@{/showUpdateAnimal/{id}(id=${animal.id})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>-->
                         <td><a th:href="@{/deleteAnimal/{id}(id=${animal.id})}" class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>
                         <td><a th:href="@{/showTransferAnimal/{id}(id=${animal.id})}" class="btn btn-primary"><i class="fas fa-angle-double-right ml-2"></i></a></td>
