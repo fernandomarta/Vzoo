@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Attendant extends Employee {
 
-    @OneToMany
+	@ManyToMany
 	private List<Habitat> habitats = new ArrayList<>();
 
     public Attendant() {

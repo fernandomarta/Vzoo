@@ -11,34 +11,37 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.projecto.vzoo.Vzoo.entities.Attendant;
 import com.projecto.vzoo.Vzoo.repositories.AttendantRepository;
+import com.projecto.vzoo.Vzoo.repositories.HabitatRepository;
 
 @Controller
 public class AttendantsPageController {
 	
     private AttendantRepository attendantRepository;
+    private HabitatRepository habitatRepository;
 	
     @Autowired
-    public AttendantsPageController(AttendantRepository attendantRepository) {
+    public AttendantsPageController(AttendantRepository attendantRepository, HabitatRepository habitatRepository) {
         this.attendantRepository = attendantRepository;
+        this.habitatRepository = habitatRepository;
     }
 
     @GetMapping("/attendantspage")
-    public String attendants(Model model)
-    {
+    public String attendants(Model model) {
         model.addAttribute("attendants", attendantRepository.findAll());
         return "attendantspage";
     }
 
-    @PostMapping("/attendantspage")
-    public String goToAttendant(Model model)
-    {
+    @PostMapping("/attendantspage") 
+    public String goToAttendant(Model model) {
     	 model.addAttribute("attendants", attendantRepository.findAll());
          return "attendantspage";
     }
 
     @GetMapping("/showAddAttendant")
-    public String showAddAttendant(Attendant attendant) {
-        return "attendant_criar_novo";
+    public String showAddAttendant(Attendant attendant, Model model) {
+    	model.addAttribute("habitatsList", habitatRepository.findAll());
+    	
+    	return "attendant_criar_novo";
     }
 
     @PostMapping("/addAttendant")

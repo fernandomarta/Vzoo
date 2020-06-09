@@ -65,17 +65,6 @@
 	</table>
 </div>
 <br/>
-<!--
-<form action="#" th:action="@{/animalspage}" th:object="${mainpage}" method="post">
-    <input type="submit" value="Animals">
-</form>
-<form action="#" th:action="@{/habitatspage}" th:object="${habitatspage}" method="post">
-    <input type="submit" value="Habitats">
-</form>
-<form action="#" th:action="@{/attendantspage}" th:object="${attendantspage}" method="post">
-    <input type="submit" value="Attendants">
-</form>
--->
 
 <!-- Zona da satisfação global --------------------------------------------------------- satisfacao -->
 <div id= "cabecalho">
@@ -85,7 +74,7 @@
    <table>
         <tr>
             <td>
-                Número de Animais:
+                Número de Animais: <span th:text="${vzoostate.animalsQuantity}"></span>
             </td>
             <td>
                 <output name="x" for="a b"></output>
@@ -93,7 +82,7 @@
         </tr>
         <tr>
             <td>
-                Número de Habitats:
+                Número de Habitats: <span th:text="${vzoostate.habitatsQuantity}"></span>
             </td>
             <td>
                 <output name="x" for="a b"></output>
@@ -101,7 +90,7 @@
         </tr>
         <tr>
             <td>
-                Número de Funcionários:
+                Número de Funcionários: <span th:text="${vzoostate.employeesQuantity}"></span>
             </td>
             <td>
                 <output name="x" for="a b"></output>
@@ -109,7 +98,7 @@
         </tr>
         <tr>
             <td>
-                Satisfação Geral do Zoo:
+                Satisfação Geral do Zoo: <span th:text="${vzoostate.vzooSatisfaction}"></span>
             </td>
             <td>
                 <output name="x" for="a b"></output>

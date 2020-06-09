@@ -32,7 +32,7 @@
                         <td th:text="${attendant.name}"></td>
                         <td th:text="${#strings.listJoin(attendant.habitats.![name], ', ')}"></td>
                         <!--<td><a th:href="@{/showUpdateHabitat/{id}(id=${attendant.id})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>-->
-		                <td><a th:href="@{/deleteHabitat/{id}(id=${attendant.id})}" class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>
+		                <td><a th:href="@{/deleteAttendant/{id}(id=${attendant.id})}" class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>
                     </tr>
                     </tbody>
                 </table>
