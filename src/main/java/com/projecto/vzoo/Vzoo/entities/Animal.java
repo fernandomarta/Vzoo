@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Animal {
@@ -21,6 +22,9 @@ public class Animal {
     private Specie specie;
     
     private String sound;
+    
+    @Size(max = 10000000)
+    private String image;
     
     @OneToOne
     private Habitat habitat;
@@ -74,6 +78,14 @@ public class Animal {
     public Habitat getHabitat() {
         return habitat;
     }
+    
+    public String getImage() {
+		return image;
+	}
+
+	public void setImage(String picture) {
+		this.image = picture;
+	}
 
     @Override
     public String toString() {

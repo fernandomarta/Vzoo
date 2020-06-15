@@ -22,8 +22,9 @@
                     <thead>
                     <tr>
                         <th>Nome</th>
-                        <th>Área</th>
-                        <!--<th>Edit</th>-->
+                        <th>Área m2</th>
+                        <th>Consultar</th>
+                        <th>Alterar</th>
                         <th>Excluir</th>
                     </tr>
                     </thead>
@@ -31,7 +32,8 @@
                     <tr th:each="habitat : ${habitats}">
                         <td th:text="${habitat.name}"></td>
                         <td th:text="${habitat.area}"></td>
-                        <!--<td><a th:href="@{/showUpdateHabitat/{id}(id=${habitat.id})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>-->
+                        <td><a th:href="@{/showConsultHabitat/{id}(id=${habitat.id})}" class="btn btn-primary"><i class="fas fa-search ml-2"></i></a></td>
+                        <td><a th:href="@{/showUpdateHabitat/{id}(id=${habitat.id})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
 		                <td><a th:href="@{/deleteHabitat/{id}(id=${habitat.id})}" class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>
                     </tr>
                     </tbody>

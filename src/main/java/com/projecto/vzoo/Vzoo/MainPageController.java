@@ -37,15 +37,15 @@ public class MainPageController {
 	
     @GetMapping("/mainpage")
     public String mainPage(Model model) {
-    	VZooSatisfactionCalculator vzooSatisfactionCalculator = new VZooSatisfactionCalculator(this.animalRepository);
-    	
     	VZooState vZooState = new VZooState();
     	
     	vZooState.setHabitatsQuantity(((ArrayList<Habitat>) habitatRepository.findAll()).size());
     	vZooState.setAnimalsQuantity(((ArrayList<Animal>) animalRepository.findAll()).size());
     	vZooState.setEmployeesQuantity(((ArrayList<Attendant>) attendantRepository.findAll()).size() + ((ArrayList<Veterinarian>) veterinarianRepository.findAll()).size());
-    	vZooState.setVzooSatisfaction(vzooSatisfactionCalculator.getVZooSatsfaction());
-    	
+
+    	VZooSatisfactionCalculator vzooSatisfactionCalculator = new VZooSatisfactionCalculator(this.animalRepository);
+    	vZooState.setVzooSatisfaction(vzooSatisfactionCalculator.getVZooSatisfaction());
+
     	model.addAttribute("vzoostate", vZooState);
     	
         return "mainpage";

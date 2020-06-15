@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Habitat {
@@ -14,11 +16,15 @@ public class Habitat {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @NotBlank
+    private String name;
+
+    @NotNull
     @DecimalMin("1.00")
     private Long area;
 
-    @NotBlank
-    private String name;
+    @Size(max = 10000000)
+    private String image;
 
     public Habitat() {
     }
@@ -52,9 +58,17 @@ public class Habitat {
         return name;
     }
 
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String picture) {
+		this.image = picture;
+	}
+
     @Override
     public String toString() {
-        return "Animal{" +
+        return "Habitat{" +
                 "id=" + id +
                 ", area=" + area +
                 ", name='" + name + '\'' +

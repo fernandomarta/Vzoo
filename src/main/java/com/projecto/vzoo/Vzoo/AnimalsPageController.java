@@ -1,19 +1,24 @@
 package com.projecto.vzoo.Vzoo;
 
+import java.io.InputStream;
+import java.util.Base64;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.projecto.vzoo.Vzoo.entities.Animal;
 import com.projecto.vzoo.Vzoo.entities.AnimalHabitatsHistory;
 import com.projecto.vzoo.Vzoo.entities.Habitat;
+import com.projecto.vzoo.Vzoo.models.VZooSatisfactionCalculator;
 import com.projecto.vzoo.Vzoo.repositories.AnimalHabitatsHistoryRepository;
 import com.projecto.vzoo.Vzoo.repositories.AnimalRepository;
 import com.projecto.vzoo.Vzoo.repositories.HabitatRepository;
@@ -53,7 +58,11 @@ public class AnimalsPageController {
     public String showConsultAnimal(@PathVariable("id") long id, Model model) {
         Animal animal = animalRepository.findById(id);
         model.addAttribute("animal", animal);
-    	model.addAttribute("animalhabitatshistory", animalsHabitatsHistoryRepository.findByAnimal(animal));
+        
+        VZooSatisfactionCalculator vzooSatisfactionCalculator = new VZooSatisfactionCalculator(animalRepository);
+        model.addAttribute("animalSatisfaction", vzooSatisfactionCalculator.getAnimalSatisfaction(animal));
+        
+        model.addAttribute("animalhabitatshistory", animalsHabitatsHistoryRepository.findByAnimal(animal));
     	
     	return "animal_consultar";
     }
@@ -67,9 +76,20 @@ public class AnimalsPageController {
     }
 
     @PostMapping("/addAnimal")
-    public String addAnimal(@Validated Animal animal, BindingResult result, Model model) {
+    public String addAnimal(MultipartFile animalImage, @Validated Animal animal, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "animal_criar_novo";
+        }
+        
+        if (animalImage != null && !animalImage.isEmpty()) {
+        	try {
+        		InputStream fis = animalImage.getInputStream();
+        		String encodedString = Base64.getEncoder().encodeToString(fis.readAllBytes());
+        		animal.setImage(encodedString);
+        	} catch(Exception e) {
+        		result.addError(new ObjectError("animal", e.getMessage()));
+        		return "animal_criar_novo";
+        	}
         }
 
         animalRepository.save(animal);
@@ -126,10 +146,24 @@ public class AnimalsPageController {
     }
 
     @PostMapping("/updateAnimal/{id}")
-    public String updateAnimal(@PathVariable("id") long id, @Validated Animal animal, BindingResult result, Model model) {
+    public String updateAnimal(MultipartFile animalImage, @PathVariable("id") long id, @Validated Animal animal, BindingResult result, Model model) {
         if (result.hasErrors()) {
             animal.setId(id);
             return "update-animal";
+        }
+
+        if (animalImage != null && !animalImage.isEmpty()) {
+        	try {
+        		InputStream fis = animalImage.getInputStream();
+        		String encodedString = Base64.getEncoder().encodeToString(fis.readAllBytes());
+        		animal.setImage(encodedString);
+        	} catch(Exception e) {
+        		result.addError(new ObjectError("animal", e.getMessage()));
+        		return "animal_alterar";
+        	}
+        } else {
+        	Animal animalAtual = animalRepository.findById(animal.getId());
+        	animal.setImage(animalAtual.getImage());
         }
 
         animalRepository.save(animal);
